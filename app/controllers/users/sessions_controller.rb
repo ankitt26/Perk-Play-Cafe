@@ -1,27 +1,68 @@
-# frozen_string_literal: true
-
 class Users::SessionsController < Devise::SessionsController
-  # before_action :configure_sign_in_params, only: [:create]
+  respond_to :json
 
-  # GET /resource/sign_in
-  # def new
-  #   super
-  # end
+  def create
+    self.resource = find_resource
 
-  # POST /resource/sign_in
-  # def create
-  #   super
-  # end
+    if resource&.valid_password?(sign_in_params[:password])
+      sign_in(resource_name, resource)
+      yield resource if block_given?
 
-  # DELETE /resource/sign_out
-  # def destroy
-  #   super
-  # end
+      render json: {
+        status: {
+          code: 200,
+          message: 'Logged in successfully.'
+        },
+        data: {
+          user: UserSerializer.new(resource).serializable_hash[:data][:attributes]
+        }
+      }, status: :ok
+    else
+      render json: {
+        status: {
+          code: 401,
+          message: 'Invalid email/username or password.'
+        }
+      }, status: :unauthorized
+    end
+  end
 
-  # protected
+  def respond_to_on_destroy
+    if current_user
+      render json: {
+        status: 200,
+        message: 'Logged out successfully.'
+      }, status: :ok
+    else
+      render json: {
+        status: 401,
+        message: "Couldn't find an active session."
+      }, status: :unauthorized
+    end
+  end
 
-  # If you have extra params to permit, append them to the sanitizer.
-  # def configure_sign_in_params
-  #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
-  # end
+  private
+
+  # Override find_for_database_authentication to allow login with both email and username
+  def find_for_database_authentication(warden_conditions)
+    conditions = warden_conditions.dup
+    if (login = conditions.delete(:login)).present?
+      where(conditions.to_h).where(['lower(email) = :value OR lower(username) = :value',
+                                    { value: login.downcase }]).first
+    else
+      where(conditions.to_h).first
+    end
+  end
+
+  # Permit both :email and :password parameters for login
+  def sign_in_params
+    params.require(:user).permit(:password, :login)
+  end
+
+  def find_resource
+    login = sign_in_params[:login]
+    return unless login.present?
+
+    User.find_by(email: login) || User.find_by(username: login)
+  end
 end
