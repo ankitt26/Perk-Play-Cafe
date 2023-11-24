@@ -1,13 +1,13 @@
 class Users::SessionsController < Devise::SessionsController
+ 
+  include RackSessionsFix
   respond_to :json
 
   def create
     self.resource = find_resource
-
     if resource&.valid_password?(sign_in_params[:password])
       sign_in(resource_name, resource)
       yield resource if block_given?
-
       render json: {
         status: {
           code: 200,
@@ -17,6 +17,7 @@ class Users::SessionsController < Devise::SessionsController
           user: UserSerializer.new(resource).serializable_hash[:data][:attributes]
         }
       }, status: :ok
+
     else
       render json: {
         status: {
@@ -26,6 +27,7 @@ class Users::SessionsController < Devise::SessionsController
       }, status: :unauthorized
     end
   end
+
 
   def respond_to_on_destroy
     if current_user
@@ -40,6 +42,7 @@ class Users::SessionsController < Devise::SessionsController
       }, status: :unauthorized
     end
   end
+
 
   private
 
@@ -62,7 +65,6 @@ class Users::SessionsController < Devise::SessionsController
   def find_resource
     login = sign_in_params[:login]
     return unless login.present?
-
     User.find_by(email: login) || User.find_by(username: login)
   end
 end
