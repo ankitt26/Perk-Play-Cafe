@@ -41,7 +41,6 @@ class Users::SessionsController < Devise::SessionsController
     end
   end
 
-
   private
 
   # Override find_for_database_authentication to allow login with both email and username
