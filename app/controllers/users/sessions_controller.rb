@@ -1,5 +1,4 @@
 class Users::SessionsController < Devise::SessionsController
- 
   include RackSessionsFix
   respond_to :json
 
@@ -27,7 +26,6 @@ class Users::SessionsController < Devise::SessionsController
       }, status: :unauthorized
     end
   end
-
 
   def respond_to_on_destroy
     if current_user
@@ -65,6 +63,7 @@ class Users::SessionsController < Devise::SessionsController
   def find_resource
     login = sign_in_params[:login]
     return unless login.present?
+
     User.find_by(email: login) || User.find_by(username: login)
   end
 end
