@@ -7,10 +7,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :confirmable,
          :validatable, :jwt_authenticatable, jwt_revocation_strategy: self
 
-         has_many :addresses, dependent: :destroy
-         has_many :orders, dependent: :destroy
-         has_one  :cart, dependent: :destroy
+  has_many :addresses, dependent: :destroy
+  has_many :orders, dependent: :destroy
+  has_one :cart, dependent: :destroy
 
-         validates :name, :username, :email, :password, presence: true
-        
+  validates :name, :username, :email, :password, presence: true
 end
