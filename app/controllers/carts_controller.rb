@@ -3,15 +3,15 @@ class CartsController < ApplicationController
 
   # GET /carts
   def index
-    @carts = Cart.all
+    @carts = current_user.cart.foods
 
     render json: @carts
   end
 
   # GET /carts/1
-  def show
-    render json: @cart
-  end
+  # def show
+  #   render json: @cart
+  # end
 
   # POST /carts
   def create

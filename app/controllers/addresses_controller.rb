@@ -3,7 +3,7 @@ class AddressesController < ApplicationController
 
   # GET /addresses
   def index
-    @addresses = Address.all
+    @addresses = current_user.addresses
 
     render json: @addresses
   end
