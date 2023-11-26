@@ -3,14 +3,16 @@ class OrdersController < ApplicationController
 
   # GET /orders
   def index
-    @orders = Order.all
-
-    render json: @orders
+    @orders = current_user.orders.includes(:foods) # Use eager loading to avoid N+1 queries
+    render json: @orders, include: :foods
   end
 
   # GET /orders/1
-  def show
-    render json: @order
+  def show 
+    # render json: @order
+    @order = Order.find(params[:id])
+    render json: @order, include: :foods
+  
   end
 
   # POST /orders
