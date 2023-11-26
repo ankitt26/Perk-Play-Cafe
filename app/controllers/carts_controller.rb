@@ -4,14 +4,9 @@ class CartsController < ApplicationController
   # GET /carts
   def index
     @carts = current_user.cart.foods
-
     render json: @carts
   end
 
-  # GET /carts/1
-  # def show
-  #   render json: @cart
-  # end
 
   # POST /carts
   def create
@@ -24,19 +19,20 @@ class CartsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /carts/1
-  def update
-    if @cart.update(cart_params)
-      render json: @cart
-    else
-      render json: @cart.errors, status: :unprocessable_entity
-    end
-  end
+  # # PATCH/PUT /carts/1
+  # def update
 
-  # DELETE /carts/1
-  def destroy
-    @cart.destroy
-  end
+  #   if @cart.update(cart_params)
+  #     render json: @cart
+  #   else
+  #     render json: @cart.errors, status: :unprocessable_entity
+  #   end
+  # end
+
+  # # DELETE /carts/1
+  # def destroy
+  #   @cart.destroy
+  # end
 
   private
 
