@@ -1,5 +1,7 @@
 class AddressesController < ApplicationController
+  
   before_action :set_address, only: %i[show update destroy]
+  load_and_authorize_resource
 
   # GET /addresses
   def index
@@ -47,6 +49,6 @@ class AddressesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def address_params
-    params.require(:address).permit(:street, :city, :pincode, :state, :country)
+    params.require(:address).permit(:landmark, :street, :city, :pincode, :state, :country, :phone ).merge(user_id: current_user.id)
   end
 end

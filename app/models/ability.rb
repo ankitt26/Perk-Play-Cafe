@@ -16,6 +16,10 @@ class Ability
     return unless user.present?
     can :read, Food
     can :read, Cart
+    can :create, Address
+    can [:read, :update, :destroy], Address, user_id: user.id
+   
+
     
 
 
