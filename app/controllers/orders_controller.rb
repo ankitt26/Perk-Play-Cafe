@@ -1,5 +1,7 @@
 class OrdersController < ApplicationController
+  
   before_action :set_order, only: %i[show update destroy]
+  load_and_authorize_resource
 
   # GET /orders
   def index
@@ -49,6 +51,6 @@ class OrdersController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def order_params
-    params.fetch(:order, {})
+    params.require(:order).permit(:address_id, :delivered).merge(user_id: current_user.id)
   end
 end

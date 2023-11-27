@@ -18,6 +18,7 @@ class Ability
     can :read, Cart
     can :create, Address
     can [:read, :update, :destroy], Address, user_id: user.id
+    can [:read, :create], Order, user_id: user.id
    
 
     
