@@ -15,7 +15,7 @@ class Ability
 
     return unless user.present?
     can :read, Food
-  
+    can :read, Cart
     
 
 

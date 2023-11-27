@@ -1,6 +1,7 @@
 class CartsController < ApplicationController
-  before_action :set_cart, only: %i[show update destroy]
-
+  # before_action :set_cart, only: %i[show update destroy]
+  load_and_authorize_resource
+  
   # GET /carts
   def index
     @carts = current_user.cart.foods
@@ -37,12 +38,13 @@ class CartsController < ApplicationController
   private
 
   # Use callbacks to share common setup or constraints between actions.
-  def set_cart
-    @cart = Cart.find(params[:id])
-  end
+  # def set_cart
+  #   @cart = Cart.find(params[:id])
+  # end
 
   # Only allow a list of trusted parameters through.
   def cart_params
-    params.fetch(:cart, {})
+    params.require(:cart).permit(:user_id).merge(user_id: current_user.id)
   end
+  
 end
