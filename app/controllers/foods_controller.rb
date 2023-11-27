@@ -1,6 +1,6 @@
 class FoodsController < ApplicationController
   before_action :set_food, only: %i[show update destroy]
-
+  load_and_authorize_resource
   # GET /foods
   def index
     @foods = Food.all

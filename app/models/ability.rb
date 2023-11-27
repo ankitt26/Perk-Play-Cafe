@@ -11,6 +11,15 @@ class Ability
     #   return unless user.admin?
     #   can :manage, :all
     #
+    cannot :manage, :all
+
+    return unless user.present?
+    can :read, Food
+  
+    
+
+
+     
     # The first argument to `can` is the action you are giving the user
     # permission to do.
     # If you pass :manage it will apply to every action. Other common actions
