@@ -16,7 +16,6 @@ class User < ApplicationRecord
   private
 
   def create_initial_cart
-    Cart.create(user_id: self.id)
+    Cart.create(user_id: id)
   end
-  
 end

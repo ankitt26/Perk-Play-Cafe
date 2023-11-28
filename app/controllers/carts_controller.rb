@@ -1,13 +1,12 @@
 class CartsController < ApplicationController
   # before_action :set_cart, only: %i[show update destroy]
   load_and_authorize_resource
-  
+
   # GET /carts
   def index
     @carts = current_user.cart.foods
     render json: @carts
   end
-
 
   # POST /carts
   def create
@@ -46,5 +45,4 @@ class CartsController < ApplicationController
   def cart_params
     params.require(:cart).permit(:user_id).merge(user_id: current_user.id)
   end
-  
 end

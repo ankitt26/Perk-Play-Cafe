@@ -36,7 +36,7 @@ class FoodsController < ApplicationController
   # DELETE /foods/1
   def destroy
     @food.destroy
-    render json: { message: "Food successfully Deleted"}
+    render json: { message: 'Food successfully Deleted' }
   end
 
   private

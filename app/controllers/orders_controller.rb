@@ -1,5 +1,4 @@
 class OrdersController < ApplicationController
-  
   before_action :set_order, only: %i[show update destroy]
   load_and_authorize_resource
 
@@ -10,11 +9,10 @@ class OrdersController < ApplicationController
   end
 
   # GET /orders/1
-  def show 
+  def show
     # render json: @order
     @order = Order.find(params[:id])
     render json: @order, include: :foods
-  
   end
 
   # POST /orders

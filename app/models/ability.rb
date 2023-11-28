@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Ability
   include CanCan::Ability
 
@@ -14,17 +12,18 @@ class Ability
     cannot :manage, :all
 
     return unless user.present?
+
     can :read, Food
     can :read, Cart
     can :create, Address
-    can [:read, :update, :destroy], Address, user_id: user.id
-    can [:read, :create], Order, user_id: user.id
-    can [:read, :create, :update, :destroy], CartFood, cart_id: user.cart.id
-    can [:create, :read], OrderFood
-    
+    can %i[read update destroy], Address, user_id: user.id
+    can %i[read create], Order, user_id: user.id
+    can %i[read create update destroy], CartFood, cart_id: user.cart.id
+    can %i[create read], OrderFood
 
 
-     
+
+
     # The first argument to `can` is the action you are giving the user
     # permission to do.
     # If you pass :manage it will apply to every action. Other common actions
