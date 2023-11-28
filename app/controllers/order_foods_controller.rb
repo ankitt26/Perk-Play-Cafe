@@ -1,11 +1,12 @@
 class OrderFoodsController < ApplicationController
    
   before_action :set_order_food, only: %i[show update destroy]
-    
-  # def index
-  #   @order_foods = OrderFood.where(order_id: current_user.orders.pluck(:id))
-  #   render json: @order_foods
-  # end
+  load_and_authorize_resource  
+
+  def index
+    @order_foods = OrderFood.where(order_id: current_user.orders.pluck(:id))
+    render json: @order_foods
+  end
   
     # def show
     #   render json: @order_food
