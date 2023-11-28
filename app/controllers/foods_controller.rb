@@ -1,6 +1,6 @@
 class FoodsController < ApplicationController
   before_action :set_food, only: %i[show update destroy]
-
+  load_and_authorize_resource
   # GET /foods
   def index
     @foods = Food.all
@@ -36,6 +36,7 @@ class FoodsController < ApplicationController
   # DELETE /foods/1
   def destroy
     @food.destroy
+    render json: { message: 'Food successfully Deleted' }
   end
 
   private
