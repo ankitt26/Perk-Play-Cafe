@@ -19,7 +19,7 @@ class Ability
     can :create, Address
     can [:read, :update, :destroy], Address, user_id: user.id
     can [:read, :create], Order, user_id: user.id
-   
+    can [:read, :create, :update, :destroy], CartFood, cart_id: user.cart.id
 
     
 

@@ -1,11 +1,12 @@
 class CartFoodsController < ApplicationController
     
     before_action :set_cart_food, only: %i[show update destroy]
-   
+    load_and_authorize_resource
+
     def index
         @cart_foods = CartFood.where(cart_id: current_user.cart.id)
         render json: @cart_foods
-      end
+    end
       
     # def show
     #   render json: @cart_food
