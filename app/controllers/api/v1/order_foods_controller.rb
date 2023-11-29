@@ -1,4 +1,4 @@
-class OrderFoodsController < ApplicationController
+class Api::V1::OrderFoodsController < ApplicationController
   before_action :set_order_food, only: %i[show update destroy]
   load_and_authorize_resource
 

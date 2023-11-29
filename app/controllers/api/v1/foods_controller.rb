@@ -1,4 +1,4 @@
-class FoodsController < ApplicationController
+class Api::V1::FoodsController < ApplicationController
   before_action :set_food, only: %i[show update destroy]
   load_and_authorize_resource
   # GET /foods
