@@ -13,7 +13,7 @@ class Api::V1::CartsController < ApplicationController
     @cart = Cart.new(cart_params)
 
     if @cart.save
-      render json: @cart, status: :created, location: @cart
+      render json: @cart, status: :created
     else
       render json: @cart.errors, status: :unprocessable_entity
     end

@@ -19,7 +19,7 @@ class Api::V1::AddressesController < ApplicationController
     @address = Address.new(address_params)
 
     if @address.save
-      render json: @address, status: :created, location: @address
+      render json: @address, status: :created
     else
       render json: @address.errors, status: :unprocessable_entity
     end
@@ -37,6 +37,7 @@ class Api::V1::AddressesController < ApplicationController
   # DELETE /addresses/1
   def destroy
     @address.destroy
+    render json: {message: "Address deleted successfully"}
   end
 
   private
