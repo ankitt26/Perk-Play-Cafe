@@ -37,7 +37,7 @@ class Api::V1::AddressesController < ApplicationController
   # DELETE /addresses/1
   def destroy
     @address.destroy
-    render json: {message: "Address deleted successfully"}
+    render json: { message: 'Address deleted successfully' }
   end
 
   private

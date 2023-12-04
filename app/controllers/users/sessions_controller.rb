@@ -77,5 +77,4 @@ class Users::SessionsController < Devise::SessionsController
       current_user.update(admin: false)
     end
   end
-
 end

@@ -21,8 +21,8 @@ class Ability
     can %i[read create update destroy], CartFood, cart_id: user.cart.id
     can %i[create read], OrderFood
 
-
     return unless user.admin?
+
     can :manage, :all
     #
     # The first argument to `can` is the action you are giving the user
