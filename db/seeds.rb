@@ -26,14 +26,6 @@ addresses = Address.create([
   { landmark: 'Landmark 5', street: 'Street 5', city: 'City 5', pincode: 13579, state: 'State 5', country: 'Country 5', phone: 9876543210, user_id: 5 },
 ])
 
-# Create carts
-carts = Cart.create([
-  { user_id: 1 },
-  { user_id: 2 },
-  { user_id: 3 },
-  { user_id: 4 },
-  { user_id: 5 },
-])
 
 # Create foods
 foods = Food.create([
@@ -46,13 +38,13 @@ foods = Food.create([
 ])
 
 # Create orders
-orders = Order.create([
-  { user_id: 1, address_id: 1 },
-  { user_id: 2, address_id: 2 },
-  { user_id: 3, address_id: 3 },
-  { user_id: 4, address_id: 4 },
-  { user_id: 5, address_id: 5 },
-])
+# orders = Order.create([
+#   { user_id: 1, address_id: 1 },
+#   { user_id: 2, address_id: 2 },
+#   { user_id: 3, address_id: 3 },
+#   { user_id: 4, address_id: 4 },
+#   { user_id: 5, address_id: 5 },
+# ])
 
 # Create associations for cart_foods
 cart_foods = CartFood.create([

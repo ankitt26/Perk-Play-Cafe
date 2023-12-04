@@ -10,13 +10,17 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
   
-  resources :orders
-  resources :carts
-  resources :addresses
-  resources :foods
-  resources :cart_foods
-  resources :order_foods
-
+  namespace :api do
+    namespace :v1 do
+      resources :current_user
+      resources :orders
+      resources :carts
+      resources :addresses
+      resources :foods
+      resources :cart_foods
+      resources :order_foods
+    end
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")

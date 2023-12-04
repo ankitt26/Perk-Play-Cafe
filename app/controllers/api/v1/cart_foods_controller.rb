@@ -1,4 +1,4 @@
-class CartFoodsController < ApplicationController
+class Api::V1::CartFoodsController < ApplicationController
   before_action :set_cart_food, only: %i[show update destroy]
   load_and_authorize_resource
 

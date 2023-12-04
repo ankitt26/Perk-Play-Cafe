@@ -15,12 +15,16 @@ class Ability
 
     can :read, Food
     can :read, Cart
-    can :create, Address
-    can %i[read update destroy], Address, user_id: user.id
+    # can :create, Address
+    can %i[read create update destroy], Address, user_id: user.id
     can %i[read create], Order, user_id: user.id
     can %i[read create update destroy], CartFood, cart_id: user.cart.id
     can %i[create read], OrderFood
 
+    return unless user.admin?
+
+    can :manage, :all
+    #
     # The first argument to `can` is the action you are giving the user
     # permission to do.
     # If you pass :manage it will apply to every action. Other common actions

@@ -1,4 +1,4 @@
-class FoodsController < ApplicationController
+class Api::V1::FoodsController < ApplicationController
   before_action :set_food, only: %i[show update destroy]
   load_and_authorize_resource
   # GET /foods
@@ -18,7 +18,7 @@ class FoodsController < ApplicationController
     @food = Food.new(food_params)
 
     if @food.save
-      render json: @food, status: :created, location: @food
+      render json: @food, status: :created
     else
       render json: @food.errors, status: :unprocessable_entity
     end

@@ -1,4 +1,4 @@
-class CartsController < ApplicationController
+class Api::V1::CartsController < ApplicationController
   # before_action :set_cart, only: %i[show update destroy]
   load_and_authorize_resource
 
@@ -13,7 +13,7 @@ class CartsController < ApplicationController
     @cart = Cart.new(cart_params)
 
     if @cart.save
-      render json: @cart, status: :created, location: @cart
+      render json: @cart, status: :created
     else
       render json: @cart.errors, status: :unprocessable_entity
     end
