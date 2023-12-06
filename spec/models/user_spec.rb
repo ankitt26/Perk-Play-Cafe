@@ -7,22 +7,22 @@ RSpec.describe User, type: :model do
   end
 
   context 'Validate all field must be present' do
-    it 'when name is empty' do
+    it 'name should be present' do
       @user.name = ''
       expect(@user).not_to be_valid
     end
 
-    it 'when username is empty' do
+    it 'username should be present' do
       @user.username = ''
       expect(@user).not_to be_valid
     end
 
-    it 'when email is empty' do
+    it 'email should be present' do
       @user.email = ''
       expect(@user).not_to be_valid
     end
 
-    it 'when pass is empty' do
+    it 'pass should be present' do
       @user.password = ''
       expect(@user).not_to be_valid
     end

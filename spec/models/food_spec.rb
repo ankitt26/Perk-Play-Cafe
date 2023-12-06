@@ -6,22 +6,22 @@ RSpec.describe Food, type: :model do
   end
 
   context 'Validate all field must be present' do
-    it "name shouldn't be empty" do
+    it 'name should be present' do
       @food.name = ''
       expect(@food).not_to be_valid
     end
 
-    it "price shouldn't be empty" do
+    it 'price should be present' do
       @food.price = ''
       expect(@food).not_to be_valid
     end
 
-    it "cooking_time shouldn't be empty" do
+    it 'cooking_time should be present' do
       @food.cooking_time = ''
       expect(@food).not_to be_valid
     end
 
-    it "quantity shouldn't be empty" do
+    it 'quantity should be present' do
       @food.quantity = ''
       expect(@food).not_to be_valid
     end
